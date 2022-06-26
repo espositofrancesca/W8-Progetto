@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epicode Mobile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="utenti">
+
+
+        <div class="info">
+            
+            <div class="user user1">
+                <p>Sim 1</p>
+                <p>Pin: 1234</p>
+                <p>Credito: <input type="text" value="0" disabled name="creditoUno"></p>
+                <p>Numero chiamate: <input type="text" value="0" disabled name="nChiamate"></input></p>
+                <p>Minuti conversazione: <span>0</span></p>
+                <input type="button" name="azzeraUno" id="" value="Azzera Chiamate">
+            </div>
+
+            <div class="user user2">
+                <p>Sim 2</p>
+                <p>Pin: 5678</p>
+                <p>Credito: <input type="text" value="0" disabled name="creditoDue"></p>
+                <p>Numero chiamate: <input type="text" value="0" disabled name="nChiamate"></input></p>
+                <p>Minuti conversazione: <span>0</span></p>
+                <input type="button" name="azzeraDue" id="" value="Azzera Chiamate">
+            </div>
+
+            <div class="user user3">
+                <p>Sim 3</p>
+                <p>Pin: 9123</p>
+                <p>Credito: <input type="text" value="0" disabled name="creditoTre"></p>
+                <p>Numero chiamate: <input type="text" value="0" disabled name="nChiamate"></input></p>
+                <p>Minuti conversazione: <span>0</span></p>
+                <input type="button" name="azzeraTre" id="" value="Azzera Chiamate">
+            </div>
+
+            <div class="ricarica">
+                <div>
+                    <h3>Effettua ricarica</h3>
+                    <input type="button" name="dieci" value="10">
+                    <input type="button" name="venti" value="20">
+                    <input type="button" name="cinquanta" value="50">
+                </div>
+    
+            </div>
+        </div>
+       
+    </div>
+    <div class="container">
+        <div class="telefono">
+
+            <div class="telefono-background"></div>
+            
+            <div class="telefono-schermo">
+                <div class="ora">
+                    <p></p>
+                </div>
+                <div class="login-utente">
+                    <input type="text" name="log" placeholder="Inserisci PIN Utente">
+                    <button> Sblocca</button>
+                </div>
+
+                <div class="phone">
+                    <div class="log-utente">
+                        <input type="text" name="utente-loggato" disabled>
+                        <input type="button" value="Cambia utente" name="logout">
+                    </div>
+                    <div class="chiamata">
+                        
+                        <input type="number" name="numero-chiamata">
+                        <!--  <p class="number"> </p> -->
+                        <p class="faiRicarica"> Hai terminato il credito, fai una ricarica!</p>
+                        <h4></h4>
+                    </div>
+
+                    <div class="button">
+                        <div class="bottoni">
+                            <!--                         <input type="button" value="1" onclick="sta('1')"> -->
+                            <button value="1" onclick="stampa('1')">1</button>
+                            <button value="2" onclick="stampa('2')">2</button>
+                            <button value="3" onclick="stampa('3')">3</button>
+                            <br>
+                            <button value="4" onclick="stampa('4')">4</button>
+                            <button value="5" onclick="stampa('5')">5</button>
+                            <button value="6" onclick="stampa('6')">6</button>
+                            <br>
+                            <button value="7" onclick="stampa('7')">7</button>
+                            <button value="8" onclick="stampa('8')">8</button>
+                            <button value="9" onclick="stampa('9')">9</button>
+                            <br>
+                            
+                            <button class="inizia"><i class="bi bi-telephone-outbound-fill"></i></button>
+<button class="termina"><i class="bi bi-telephone-x-fill"></i></button>
+                            <button value="0" onclick="stampa('0')">0</button>
+                            <button value="#" class="inizia"><i class="bi bi-backspace-fill"></i></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</body>
+
+</html>
