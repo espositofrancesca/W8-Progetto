@@ -7,6 +7,8 @@ html {
 body{
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    height: 100vh;
    
 }
 .telefono {
@@ -142,6 +144,11 @@ button.termina {
     font-size: 1rem;
 }
 
+button.canc{
+    color: rgb(224, 79, 79);
+    background-color: white;
+}
+
 button.inizia {
     background-color: white;
     color: rgb(82, 146, 62);
@@ -150,7 +157,7 @@ button.inizia {
 
 .faiRicarica {
     font-size: 0.6rem;
-    color: red;
+    color: rgb(224, 79, 79);
     display: none;
 }
 

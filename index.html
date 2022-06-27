@@ -26,7 +26,6 @@
                 <p>Pin: 1234</p>
                 <p>Credito: <input type="text" value="0" disabled name="creditoUno"></p>
                 <p>Numero chiamate: <input type="text" value="0" disabled name="nChiamate"></input></p>
-                <p>Minuti conversazione: <span>0</span></p>
                 <input type="button" name="azzeraUno" id="" value="Azzera Chiamate">
             </div>
 
@@ -35,7 +34,6 @@
                 <p>Pin: 5678</p>
                 <p>Credito: <input type="text" value="0" disabled name="creditoDue"></p>
                 <p>Numero chiamate: <input type="text" value="0" disabled name="nChiamate"></input></p>
-                <p>Minuti conversazione: <span>0</span></p>
                 <input type="button" name="azzeraDue" id="" value="Azzera Chiamate">
             </div>
 
@@ -44,7 +42,6 @@
                 <p>Pin: 9123</p>
                 <p>Credito: <input type="text" value="0" disabled name="creditoTre"></p>
                 <p>Numero chiamate: <input type="text" value="0" disabled name="nChiamate"></input></p>
-                <p>Minuti conversazione: <span>0</span></p>
                 <input type="button" name="azzeraTre" id="" value="Azzera Chiamate">
             </div>
 
@@ -81,15 +78,14 @@
                     </div>
                     <div class="chiamata">
                         
-                        <input type="number" name="numero-chiamata">
-                        <!--  <p class="number"> </p> -->
+                       <input type="number" name="numero-chiamata" id="canc">
+                         <!-- <p class="number"> </p> -->
                         <p class="faiRicarica"> Hai terminato il credito, fai una ricarica!</p>
                         <h4></h4>
                     </div>
 
                     <div class="button">
                         <div class="bottoni">
-                            <!--                         <input type="button" value="1" onclick="sta('1')"> -->
                             <button value="1" onclick="stampa('1')">1</button>
                             <button value="2" onclick="stampa('2')">2</button>
                             <button value="3" onclick="stampa('3')">3</button>
@@ -104,9 +100,9 @@
                             <br>
                             
                             <button class="inizia"><i class="bi bi-telephone-outbound-fill"></i></button>
-<button class="termina"><i class="bi bi-telephone-x-fill"></i></button>
+                            <button class="termina"><i class="bi bi-telephone-x-fill"></i></button>
                             <button value="0" onclick="stampa('0')">0</button>
-                            <button value="#" class="inizia"><i class="bi bi-backspace-fill"></i></i></button>
+                            <button value="#" class="canc" onclick="svuota()"><i class="bi bi-backspace-fill"></i></i></button>
                         </div>
                     </div>
                 </div>

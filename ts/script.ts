@@ -8,6 +8,22 @@ let interval: number
 let credi: number
 
 
+function stampa(num?: number) {
+    let schermo = <HTMLInputElement>document.querySelector('.chiamata input[name="numero-chiamata"]')
+    display += num
+    schermo.value = display
+    schermo.innerHTML = display
+}
+
+function svuota() {
+    display = ''
+    let s = <HTMLInputElement>document.querySelector('#canc')
+    if (s!== null) {
+      s.value = display
+        s.innerHTML = display 
+    }
+         
+      }
 
 document.addEventListener("DOMContentLoaded", function () {
     let login = <HTMLInputElement>document.querySelector('.login-utente input')
@@ -37,8 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let termina = <HTMLButtonElement>document.querySelector('.termina')
     termina.addEventListener('click', min)
-    let cancella = document.querySelector('.bi-arrow-left-square-fill')
-    cancella?.addEventListener('click', canc)
     let nChiamUno = <HTMLInputElement>document.querySelector('.user1 input[name="nChiamate"]')
     let nChiamDue = <HTMLInputElement>document.querySelector('.user2 input[name="nChiamate"]')
     let nChiamTre = <HTMLInputElement>document.querySelector('.user3 input[name="nChiamate"]')
@@ -52,11 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
     azzeraTre?.addEventListener('click', azzeraT)
 
     let faiRicarica = <HTMLElement>document.querySelector('.faiRicarica')
-    let ora =  <HTMLElement>document.querySelector('.ora p')
+    let ora = <HTMLElement>document.querySelector('.ora p')
     let bg = <HTMLElement>document.querySelector('.telefono-schermo')
-    let schermo = <HTMLInputElement>document.querySelector('.chiamata input[name="numero-chiamata"]')
+    let schermo = <HTMLInputElement>document.querySelector('#canc')
+   
 
-    
+
     credi = setInterval(orario, 1000);
 
     // ----------- FUNZIONI LOGIN/LOGOUT ------------
@@ -66,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
             phone.style.display = "flex";
             ric.style.display = "initial";
             bg.style.backgroundImage = "none"
-            ora.style.display= "none";
+            ora.style.display = "none";
 
             if (utlogg !== null) {
                 utlogg.value = login.value;
@@ -81,38 +96,35 @@ document.addEventListener("DOMContentLoaded", function () {
         phone.style.display = "none";
         logOk.style.display = "initial";
         bg.style.backgroundImage = "url(../images/sfondo.png)"
-        ora.style.display= "block";
-        
+        ora.style.display = "block";
+
     }
 
     // ------------- FUNZIONI RICARICHE ------------- 
     function ricaricaDieci() {
+        faiRicarica.style.display = 'none';
         if (+utlogg.value == userUno.pin) {
             userUno.ricarica(10)
             ricUno.value = `${userUno.credito}`
-            faiRicarica.style.display = 'none';
 
         } else if (+utlogg.value == userDue.pin) {
             userDue.ricarica(10)
             ricDue.value = `${userDue.credito}`
-            faiRicarica.style.display = 'none';
         } else {
             userTre.ricarica(10)
             ricTre.value = `${userTre.credito}`
-            faiRicarica.style.display = 'none';
         }
         console.log(userUno);
         console.log(userDue);
 
         console.log(userTre);
-    
+
     }
     function ricaricaVenti() {
+        faiRicarica.style.display = 'none';
         if (+utlogg.value == userUno.pin) {
             userUno.ricarica(20)
             ricUno.value = `${userUno.credito}`
-            console.log(userUno);
-            console.log(userDue)
         } else if (+utlogg.value == userDue.pin) {
             userDue.ricarica(20)
             ricDue.value = `${userDue.credito}`
@@ -122,9 +134,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     function ricaricaCinquanta() {
+        faiRicarica.style.display = 'none';
         if (+utlogg.value == userUno.pin) {
             userUno.ricarica(50)
             ricUno.value = `${userUno.credito}`
+            
         }
         else if (+utlogg.value == userDue.pin) {
             userDue.ricarica(50)
@@ -151,10 +165,10 @@ document.addEventListener("DOMContentLoaded", function () {
             ricTre.value = `${userTre.credito}` // stampa credito aggiornato 
             nChiamTre.value = `${userTre.numeroChiamate}` //stampa numero chiamate  
         }
-
-       /*  console.log(userUno);
-        console.log(userDue);
-        console.log(userTre); */
+        num404()
+        /*  console.log(userUno);
+         console.log(userDue);
+         console.log(userTre); */
     }
 
     function min() {
@@ -167,19 +181,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function azzeraU(){
+    function azzeraU() {
         userUno.azzeraChiamate()
         nChiamUno.value = `${userUno.numeroChiamate}`
         console.log(userUno);
     }
 
-    function azzeraD(){
+    function azzeraD() {
         userDue.azzeraChiamate()
         nChiamDue.value = `${userDue.numeroChiamate}`
         console.log(userDue);
     }
 
-    function azzeraT(){
+    function azzeraT() {
         userTre.azzeraChiamate()
         nChiamTre.value = `${userTre.numeroChiamate}`
         console.log(userTre);
@@ -212,13 +226,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         //metodo chiamata che ogni minuto scala 20cent e incrementa il numero chiamate 
         public chiamata(): void {
-           
-            if (this.credito < 0.21) {
+
+            if (this.credito < 0.20) {
                 alert('Il tuo credito è terminato, effetua una ricarica!');
                 /*  clearInterval(interval) */
             } else {
 
-               this.credito -= 0.21
+                this.credito -= 0.20
                 /* this.credito = +this.credito.toFixed(2); */
                 interval = setInterval(timer, 1000)
                 termina.style.zIndex = '1';
@@ -230,15 +244,15 @@ document.addEventListener("DOMContentLoaded", function () {
         //metodo che restituisce il credito residuo
         public numero404(credito: number): void {
             //alert o popup
-            alert(`Grazie per essere nostro cliente! Il suo credito è di ${credito} €`)
+            alert(`Grazie per essere nostro cliente! Il suo credito è di ${credito.toFixed(2)} €`)
         }
 
         //metodo che restituisce il numero delle chiamate
         // scritto il metodo ma non utilizzato, contatore chiamate già presente nel riepilogo sim 
 
-       /*  public getNumeroChiamate(): void {
-            alert(`Hai effettuato ${this.numeroChiamate} chiamate`)
-        } */
+        /*  public getNumeroChiamate(): void {
+             alert(`Hai effettuato ${this.numeroChiamate} chiamate`)
+         } */
 
         //metodo che azzera il numero delle chiamate 
         public azzeraChiamate(): void {
@@ -263,44 +277,44 @@ document.addEventListener("DOMContentLoaded", function () {
         if (+utlogg.value == userUno.pin && secondi >= 60) {
             secondi = 0;
             minuti++;
-            userUno.credito -= 0.21
+            userUno.credito -= 0.20
             userUno.credito = +userUno.credito.toFixed(2)
             ricUno.value = `${userUno.credito}`
-            
-        } 
+
+        }
 
         if (+utlogg.value == userDue.pin && secondi >= 60) {
             secondi = 0;
             minuti++;
-            userDue.credito -= 0.21
+            userDue.credito -= 0.20
             userDue.credito = +userDue.credito.toFixed(2)
             ricDue.value = `${userDue.credito}`
-            
+
         }
 
         if (+utlogg.value == userTre.pin && secondi >= 60) {
             secondi = 0;
             minuti++;
-            userTre.credito -= 0.21
+            userTre.credito -= 0.20
             userTre.credito = +userTre.credito.toFixed(2)
             ricTre.value = `${userTre.credito}`
-            
+
         }
         printTime()
         credit()
     }
 
-function credit(){
-    if (+utlogg.value == userUno.pin && userUno.credito < 0.20 || +utlogg.value == userDue.pin && userDue.credito < 0.20 || +utlogg.value == userTre.pin && userTre.credito < 0.20){
-        clearInterval(interval)
-        secondi = 0;
-        minuti = 0;
-        termina.style.zIndex = '-1';
-        faiRicarica.style.display = 'block';
-        printTime()
-            
-    } 
-}
+    function credit() {
+        if (+utlogg.value == userUno.pin && userUno.credito < 0.20 || +utlogg.value == userDue.pin && userDue.credito < 0.20 || +utlogg.value == userTre.pin && userTre.credito < 0.20) {
+            clearInterval(interval)
+            secondi = 0;
+            minuti = 0;
+            termina.style.zIndex = '-1';
+            faiRicarica.style.display = 'block';
+            printTime()
+
+        }
+    }
 
     function printTime() {
         let stamp = document.querySelector('.chiamata h4')
@@ -308,33 +322,56 @@ function credit(){
             stamp.innerHTML = `${minuti}:${secondi}`
     }
 
-    function orario(){
-    let date = new Date();
-    let o = addZero(date.getHours());
-    let m = addZero(date.getMinutes());
-    let time =  o + ":" + m  
-    ora.innerHTML = time 
+    function orario() {
+        let date = new Date();
+        let o = addZero(date.getHours());
+        let m = addZero(date.getMinutes());
+        let time = o + ":" + m
+        ora.innerHTML = time
     }
-    
-    
-    function addZero(i:any) {
-        if (i < 10) {i = "0" + i}
+
+
+    function addZero(i: any) {
+        if (i < 10) { i = "0" + i }
         return i;
-      }
+    }
+
+
+    // purtroppo non del tutto funzionante, non ho potuto perfezzionarla per questioni di tempo 
+   function num404(){
+    if (+utlogg.value == userUno.pin && schermo.value == '404'){
+        userUno.numero404(userUno.credito)
+        clearInterval(interval)
+        termina.style.zIndex = '-1';
+        secondi = 0;
+        minuti = 0;
+        printTime()
+    } else if (+utlogg.value == userDue.pin && schermo.value == '404'){
+        userDue.numero404(userDue.credito)
+        clearInterval(interval)
+        termina.style.zIndex = '-1';
+        secondi = 0;
+        minuti = 0;
+        printTime()
+    } else if(+utlogg.value == userTre.pin && schermo.value == '404') {
+         userTre.numero404(userDue.credito)
+        clearInterval(interval)
+        termina.style.zIndex = '-1';
+        secondi = 0;
+        minuti = 0;
+        printTime()
+
+    }
+   }
     
-})
 
+    }
+)
 
-function stampa(num?: number) {
-    let schermo = <HTMLInputElement>document.querySelector('.chiamata input[name="numero-chiamata"]')
-    display += num
-    schermo.value = display
-    schermo.innerHTML = display
-}
+ 
 
+            
+        
 
-function canc() {
-
-}
 
 

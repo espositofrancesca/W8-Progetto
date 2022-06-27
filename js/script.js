@@ -5,6 +5,20 @@ let minuti = 0;
 let display = '';
 let interval;
 let credi;
+function stampa(num) {
+    let schermo = document.querySelector('.chiamata input[name="numero-chiamata"]');
+    display += num;
+    schermo.value = display;
+    schermo.innerHTML = display;
+}
+function svuota() {
+    display = '';
+    let s = document.querySelector('#canc');
+    if (s !== null) {
+        s.value = display;
+        s.innerHTML = display;
+    }
+}
 document.addEventListener("DOMContentLoaded", function () {
     let login = document.querySelector('.login-utente input');
     let logOk = document.querySelector('.login-utente');
@@ -28,8 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
     chiama === null || chiama === void 0 ? void 0 : chiama.addEventListener('click', chiamata);
     let termina = document.querySelector('.termina');
     termina.addEventListener('click', min);
-    let cancella = document.querySelector('.bi-arrow-left-square-fill');
-    cancella === null || cancella === void 0 ? void 0 : cancella.addEventListener('click', canc);
     let nChiamUno = document.querySelector('.user1 input[name="nChiamate"]');
     let nChiamDue = document.querySelector('.user2 input[name="nChiamate"]');
     let nChiamTre = document.querySelector('.user3 input[name="nChiamate"]');
@@ -42,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let faiRicarica = document.querySelector('.faiRicarica');
     let ora = document.querySelector('.ora p');
     let bg = document.querySelector('.telefono-schermo');
-    let schermo = document.querySelector('.chiamata input[name="numero-chiamata"]');
+    let schermo = document.querySelector('#canc');
     credi = setInterval(orario, 1000);
     // ----------- FUNZIONI LOGIN/LOGOUT ------------
     function loginApp() {
@@ -69,31 +81,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // ------------- FUNZIONI RICARICHE ------------- 
     function ricaricaDieci() {
+        faiRicarica.style.display = 'none';
         if (+utlogg.value == userUno.pin) {
             userUno.ricarica(10);
             ricUno.value = `${userUno.credito}`;
-            faiRicarica.style.display = 'none';
         }
         else if (+utlogg.value == userDue.pin) {
             userDue.ricarica(10);
             ricDue.value = `${userDue.credito}`;
-            faiRicarica.style.display = 'none';
         }
         else {
             userTre.ricarica(10);
             ricTre.value = `${userTre.credito}`;
-            faiRicarica.style.display = 'none';
         }
         console.log(userUno);
         console.log(userDue);
         console.log(userTre);
     }
     function ricaricaVenti() {
+        faiRicarica.style.display = 'none';
         if (+utlogg.value == userUno.pin) {
             userUno.ricarica(20);
             ricUno.value = `${userUno.credito}`;
-            console.log(userUno);
-            console.log(userDue);
         }
         else if (+utlogg.value == userDue.pin) {
             userDue.ricarica(20);
@@ -105,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     function ricaricaCinquanta() {
+        faiRicarica.style.display = 'none';
         if (+utlogg.value == userUno.pin) {
             userUno.ricarica(50);
             ricUno.value = `${userUno.credito}`;
@@ -134,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ricTre.value = `${userTre.credito}`; // stampa credito aggiornato 
             nChiamTre.value = `${userTre.numeroChiamate}`; //stampa numero chiamate  
         }
+        num404();
         /*  console.log(userUno);
          console.log(userDue);
          console.log(userTre); */
@@ -174,12 +185,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         //metodo chiamata che ogni minuto scala 20cent e incrementa il numero chiamate 
         chiamata() {
-            if (this.credito < 0.21) {
+            if (this.credito < 0.20) {
                 alert('Il tuo credito è terminato, effetua una ricarica!');
                 /*  clearInterval(interval) */
             }
             else {
-                this.credito -= 0.21;
+                this.credito -= 0.20;
                 /* this.credito = +this.credito.toFixed(2); */
                 interval = setInterval(timer, 1000);
                 termina.style.zIndex = '1';
@@ -189,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //metodo che restituisce il credito residuo
         numero404(credito) {
             //alert o popup
-            alert(`Grazie per essere nostro cliente! Il suo credito è di ${credito} €`);
+            alert(`Grazie per essere nostro cliente! Il suo credito è di ${credito.toFixed(2)} €`);
         }
         //metodo che restituisce il numero delle chiamate
         // scritto il metodo ma non utilizzato, contatore chiamate già presente nel riepilogo sim 
@@ -209,21 +220,21 @@ document.addEventListener("DOMContentLoaded", function () {
         if (+utlogg.value == userUno.pin && secondi >= 60) {
             secondi = 0;
             minuti++;
-            userUno.credito -= 0.21;
+            userUno.credito -= 0.20;
             userUno.credito = +userUno.credito.toFixed(2);
             ricUno.value = `${userUno.credito}`;
         }
         if (+utlogg.value == userDue.pin && secondi >= 60) {
             secondi = 0;
             minuti++;
-            userDue.credito -= 0.21;
+            userDue.credito -= 0.20;
             userDue.credito = +userDue.credito.toFixed(2);
             ricDue.value = `${userDue.credito}`;
         }
         if (+utlogg.value == userTre.pin && secondi >= 60) {
             secondi = 0;
             minuti++;
-            userTre.credito -= 0.21;
+            userTre.credito -= 0.20;
             userTre.credito = +userTre.credito.toFixed(2);
             ricTre.value = `${userTre.credito}`;
         }
@@ -258,12 +269,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return i;
     }
+    // purtroppo non del tutto funzionante, non ho potuto perfezzionarla per questioni di tempo 
+    function num404() {
+        if (+utlogg.value == userUno.pin && schermo.value == '404') {
+            userUno.numero404(userUno.credito);
+            clearInterval(interval);
+            termina.style.zIndex = '-1';
+            secondi = 0;
+            minuti = 0;
+            printTime();
+        }
+        else if (+utlogg.value == userDue.pin && schermo.value == '404') {
+            userDue.numero404(userDue.credito);
+            clearInterval(interval);
+            termina.style.zIndex = '-1';
+            secondi = 0;
+            minuti = 0;
+            printTime();
+        }
+        else if (+utlogg.value == userTre.pin && schermo.value == '404') {
+            userTre.numero404(userDue.credito);
+            clearInterval(interval);
+            termina.style.zIndex = '-1';
+            secondi = 0;
+            minuti = 0;
+            printTime();
+        }
+    }
 });
-function stampa(num) {
-    let schermo = document.querySelector('.chiamata input[name="numero-chiamata"]');
-    display += num;
-    schermo.value = display;
-    schermo.innerHTML = display;
-}
-function canc() {
-}
